@@ -12,71 +12,53 @@ public class DecodeLabs_Java_P1 {
         int maxAttempts = 7;
         String playAgain = "y";
 
-        System.out.println("========================================");
-        System.out.println("   DECODELABS - NUMBER GUESSING GAME   ");
-        System.out.println("========================================");
-
-        // Boucle principale : plusieurs rounds
+        System.out.println("");
+        System.out.println(" DECODELABS-NUMBER GUESSING GAME");
+        System.out.println("");
         do {
-            int target = random.nextInt(100) + 1; // Nombre entre 1 et 100
+            int target = random.nextInt(100) + 1;
             int attempts = 0;
             boolean win = false;
+            System.out.println("\nI picked a number between 1 and 100.");
+            System.out.println("You have "+ maxAttempts +" attempts. Good luck!\n");
 
-            System.out.println("\nJ'ai choisi un nombre entre 1 et 100.");
-            System.out.println("Vous avez " + maxAttempts + " tentatives. Bonne chance !\n");
-
-            // Boucle de jeu : while (!win)
             while (!win && attempts < maxAttempts) {
-
-                System.out.print("Tentative " + (attempts + 1) + "/" + maxAttempts + " > Entrez votre nombre : ");
-
+                System.out.print("Attempt " + (attempts + 1) + "/" + maxAttempts + " > Enter your guess: ");
                 try {
                     int guess = sc.nextInt();
-
                     if (guess < 1 || guess > 100) {
-                        System.out.println("  Entrez un nombre entre 1 et 100 !");
+                        System.out.println("  Please enter a number between 1 and 100!");
                     } else if (guess == target) {
                         attempts++;
                         win = true;
                         int points = maxAttempts - attempts + 1;
                         score += points;
-                        System.out.println("\n  CORRECT ! Le nombre etait bien " + target + " !");
-                        System.out.println("  Trouve en " + attempts + " tentative(s). +"+points+" points !");
+                        System.out.println("\n  CORRECT! The number was " + target + "!");
+                        System.out.println("  Found in " + attempts + " attempt(s). +" + points + " points!");
                     } else if (guess > target) {
                         attempts++;
-                        System.out.println("  Trop HAUT ! Essayez plus bas.");
+                        System.out.println("Too HIGH! Try lower.");
                     } else {
                         attempts++;
-                        System.out.println("  Trop BAS ! Essayez plus haut.");
+                        System.out.println("Too LOW! Try higher.");
                     }
-
                 } catch (Exception e) {
-                    // Gestion de l'erreur si l'utilisateur tape une lettre
-                    System.out.println("  Entree invalide ! Tapez un nombre entier.");
-                    sc.nextLine(); // Vider le buffer (Scanner Trap)
+                    System.out.println("Invalid input! Please enter a whole number.");
+                    sc.nextLine();
                 }
             }
-
-            // Fin de round sans trouver
             if (!win) {
-                System.out.println("\n  PERDU ! Le nombre etait : " + target);
+                System.out.println("\n GAME OVER! The number was:"+ target);
             }
-
-            System.out.println("  Score total : " + score + " points");
-
-            // Rejouer ?
-            System.out.print("\nVoulez-vous rejouer ? (y/n) : ");
-            sc.nextLine(); // Vider le buffer
-            playAgain = sc.nextLine().trim().toLowerCase();
-
+            System.out.println("  Total score: " + score + " points");
+            System.out.print("\nPlay again? (y/n): ");
+            sc.nextLine();
+            playAgain = sc.nextLine().trim().toLowerCase()
         } while (playAgain.equals("y"));
-
-        // Score final
-        System.out.println("\n========================================");
-        System.out.println("   FIN DE PARTIE - SCORE FINAL : " + score + " pts");
-        System.out.println("========================================");
-        System.out.println("Merci d'avoir joue ! - DecodeLabs 2026");
-
+        System.out.println("\n");
+        System.out.println("   GAME OVER - FINAL SCORE: " + score + " pts");
+        System.out.println("");
+        System.out.println("Thanks for playing!- DecodeLabs 2026");
         sc.close();
     }
 }
